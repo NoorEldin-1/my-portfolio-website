@@ -52,7 +52,7 @@ Instantly sign in with your Google account with a single click, no complex regis
       "axios",
       "redux",
     ],
-    image: `https://img.youtube.com/vi/URlCIqp_A3o/maxresdefault.jpg`,
+    image: `https://img.youtube.com/vi/URlCIqp_A3o/hqdefault.jpg`,
   },
   {
     name: "SOCIALIZE",
@@ -90,7 +90,7 @@ Users can switch between two themes: Dark and Light mode.`,
       "axios",
       "redux",
     ],
-    image: `https://img.youtube.com/vi/uW6ezChzl7Q/maxresdefault.jpg`,
+    image: `https://img.youtube.com/vi/uW6ezChzl7Q/hqdefault.jpg`,
   },
   {
     name: "BUYIT",
@@ -144,7 +144,7 @@ Playlist Downloads: Grab entire YouTube playlists in MP4 or MP3, with the same q
       "axios",
       "redux",
     ],
-    image: `https://img.youtube.com/vi/B-g4ZWdilYU/maxresdefault.jpg`,
+    image: `https://img.youtube.com/vi/B-g4ZWdilYU/hqdefault.jpg`,
   },
 ];
 
