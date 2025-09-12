@@ -139,16 +139,16 @@ Playlist Downloads: Grab entire YouTube playlists in MP4 or MP3, with the same q
 ];
 
 const imagesData = [
-  "/public/assets/react.png",
-  "/public/assets/axios.png",
-  "/public/assets/FastAPI.png",
-  "/public/assets/laravel.png",
-  "/public/assets/Material UI.png",
-  "/public/assets/motion.png",
-  "/public/assets/mysql.png",
-  "/public/assets/php.png",
-  "/public/assets/python.png",
-  "/public/assets/Tailwind CSS.png",
+  "/public/react.png",
+  "/public/axios.png",
+  "/public/FastAPI.png",
+  "/public/laravel.png",
+  "/public/Material UI.png",
+  "/public/motion.png",
+  "/public/mysql.png",
+  "/public/php.png",
+  "/public/python.png",
+  "/public/Tailwind CSS.png",
 ];
 
 function App() {
