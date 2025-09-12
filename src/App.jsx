@@ -21,6 +21,16 @@ import { EffectCoverflow, Mousewheel, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import { useState, useMemo, useCallback } from "react";
+import react from "./assets/react.png";
+import axios from "./assets/axios.png";
+import FastAPI from "./assets/FastAPI.png";
+import laravel from "./assets/laravel.png";
+import MaterialUI from "./assets/Material UI.png";
+import motion from "./assets/motion.png";
+import mysql from "./assets/mysql.png";
+import php from "./assets/php.png";
+import python from "./assets/python.png";
+import tailwind from "./assets/Tailwind CSS.png";
 
 const projectsData = [
   {
@@ -139,16 +149,16 @@ Playlist Downloads: Grab entire YouTube playlists in MP4 or MP3, with the same q
 ];
 
 const imagesData = [
-  "/public/react.png",
-  "/public/axios.png",
-  "/public/FastAPI.png",
-  "/public/laravel.png",
-  "/public/Material UI.png",
-  "/public/motion.png",
-  "/public/mysql.png",
-  "/public/php.png",
-  "/public/python.png",
-  "/public/Tailwind CSS.png",
+  react,
+  axios,
+  FastAPI,
+  laravel,
+  MaterialUI,
+  motion,
+  mysql,
+  php,
+  python,
+  tailwind,
 ];
 
 function App() {
