@@ -162,7 +162,6 @@ const imagesData = [
 ];
 
 const App = React.memo(() => {
-  console.log("App Rendered");
   const [openInfoDialog, setOpenInfoDialog] = useState(false);
   const handleOpenInfoDialog = useCallback(() => setOpenInfoDialog(true), []);
   const handleCloseInfoDialog = useCallback(() => setOpenInfoDialog(false), []);
@@ -188,67 +187,84 @@ const App = React.memo(() => {
   );
 
   const projects = useMemo(() => {
-    console.log("project mapped");
     return projectsData.map((project, i) => (
       <SwiperSlide
         key={i}
         style={{
-          width: "250px",
-          height: "250px",
+          width: "280px",
+          height: "280px",
           userSelect: "none",
-          backgroundColor: "white",
-          borderRadius: "12px",
+          backgroundColor: "rgba(255, 255, 255, 0.05)",
+          backdropFilter: "blur(12px)",
+          WebkitBackdropFilter: "blur(12px)",
+          borderRadius: "20px",
           overflow: "hidden",
           position: "relative",
-          boxShadow: "0 4px 12px rgba(0, 0, 0, 0.08)",
-          transition: "transform 0.2s ease, box-shadow 0.2s ease",
-          "&:hover": {
-            transform: "translateY(-4px)",
-            boxShadow: "0 8px 24px rgba(0, 0, 0, 0.12)",
-          },
+          border: "1px solid rgba(255, 255, 255, 0.1)",
+          boxShadow: "0 8px 32px rgba(0, 0, 0, 0.2)",
+          transition: "transform 0.3s ease, box-shadow 0.3s ease",
         }}
       >
         <img
           src={project.image}
           alt=""
-          style={{ width: "100%", height: "100%", objectFit: "cover" }}
+          loading="lazy"
+          style={{
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            filter: "brightness(0.8)",
+          }}
         />
-        <Button
-          variant="contained"
+        <Box
           sx={{
             position: "absolute",
-            bottom: 15,
-            left: "50%",
-            transform: "translateX(-50%)",
-            background: "linear-gradient(135deg, #00c6ff, #0072ff)", // Gradient
-            color: "white",
-            fontWeight: "600",
-            letterSpacing: "3px",
-            textTransform: "none",
-            borderRadius: "8px",
-            px: 3,
-            py: 0.5,
-            boxShadow: "0 4px 12px rgba(0,0,0,0.3)",
-            "&:hover": {
-              background: "linear-gradient(135deg, #0072ff, #00c6ff)",
-              boxShadow: "0 6px 18px rgba(0,0,0,0.4)",
-              transform: "translateX(-50%) scale(1.05)",
-            },
-          }}
-          onClick={() => {
-            handleOpenProjectDialog(project);
+            bottom: 0,
+            left: 0,
+            right: 0,
+            background: "linear-gradient(to top, rgba(0,0,0,0.8), transparent)",
+            p: 2,
+            pt: 4,
           }}
         >
-          details
-        </Button>
+          <Button
+            variant="contained"
+            sx={{
+              width: "100%",
+              background: "linear-gradient(135deg, #6366f1, #7c3aed)",
+              color: "white",
+              fontWeight: "600",
+              letterSpacing: "1px",
+              textTransform: "none",
+              borderRadius: "12px",
+              py: 1,
+              boxShadow: "0 4px 20px rgba(99, 102, 241, 0.3)",
+              "&:hover": {
+                background: "linear-gradient(135deg, #7c3aed, #6366f1)",
+                boxShadow: "0 6px 24px rgba(99, 102, 241, 0.4)",
+                transform: "scale(1.02)",
+              },
+            }}
+            onClick={() => {
+              handleOpenProjectDialog(project);
+            }}
+          >
+            View Details
+          </Button>
+        </Box>
       </SwiperSlide>
     ));
   }, [handleOpenProjectDialog]);
 
   const images = useMemo(() => {
-    console.log("image mapped");
     return imagesData.map((img, i) => (
-      <img key={i} src={img} alt="" style={{ width: "50px", height: "50px" }} />
+      <img
+        key={i}
+        src={img}
+        alt=""
+        loading="lazy"
+        style={{ width: "50px", height: "50px" }}
+      />
     ));
   }, []);
 
@@ -283,7 +299,6 @@ const App = React.memo(() => {
 });
 
 const AnimatedBackground = React.memo(() => {
-  console.log("AnimatedBackground Rendered");
   return (
     <div className="aurora-container">
       <div className="aurora-blob"></div>
@@ -294,7 +309,6 @@ const AnimatedBackground = React.memo(() => {
 });
 
 const MainContent = React.memo(({ handleOpenInfoDialog }) => {
-  console.log("MainContent Rendered");
   return (
     <div className="content-container">
       <Typography variant="h4" align="center" className="reveal-colored-text">
@@ -331,7 +345,6 @@ const MainContent = React.memo(({ handleOpenInfoDialog }) => {
 });
 
 const InfoDialog = React.memo(({ openInfoDialog, handleCloseInfoDialog }) => {
-  console.log("InfoDialog Rendered");
   return (
     <Dialog
       open={openInfoDialog}
@@ -339,11 +352,15 @@ const InfoDialog = React.memo(({ openInfoDialog, handleCloseInfoDialog }) => {
       scroll="paper"
       PaperProps={{
         sx: {
-          borderRadius: "20px",
-          background: "rgba(255,255,255,0.05)",
-          backdropFilter: "blur(12px)",
-          border: "1px solid rgba(255,255,255,0.1)",
-          boxShadow: "0 8px 32px rgba(0,0,0,0.4)",
+          borderRadius: "24px",
+          background: "rgba(255, 255, 255, 0.05)",
+          backdropFilter: "blur(16px)",
+          WebkitBackdropFilter: "blur(16px)",
+          border: "1px solid rgba(255, 255, 255, 0.1)",
+          boxShadow: "0 12px 40px rgba(0, 0, 0, 0.3)",
+          maxWidth: "800px",
+          width: "90%",
+          maxHeight: "80vh",
         },
       }}
     >
@@ -351,11 +368,12 @@ const InfoDialog = React.memo(({ openInfoDialog, handleCloseInfoDialog }) => {
         sx={{
           textAlign: "center",
           fontWeight: 700,
-          fontSize: "1.5rem",
-          background: "linear-gradient(90deg,#00f5d4,#9b5de5,#f15bb5)",
+          fontSize: "1.8rem",
+          background: "linear-gradient(90deg, #818cf8, #7c3aed, #6366f1)",
           WebkitBackgroundClip: "text",
           WebkitTextFillColor: "transparent",
           mb: 2,
+          pt: 3,
         }}
       >
         How can I help you?
@@ -363,21 +381,22 @@ const InfoDialog = React.memo(({ openInfoDialog, handleCloseInfoDialog }) => {
 
       <DialogContent
         dividers
+        className="dialog-scrollable"
         sx={{
-          color: "rgba(255,255,255,0.85)",
-          fontSize: "0.95rem",
-          "&::-webkit-scrollbar": { display: "none" },
-          scrollbarWidth: "none",
+          color: "rgba(255, 255, 255, 0.9)",
+          fontSize: "1rem",
+          maxHeight: "60vh",
+          overflowY: "auto",
         }}
       >
         {/* About Me */}
         <Typography
           variant="h6"
-          sx={{ mb: 1, color: "#00f5d4", fontWeight: 600 }}
+          sx={{ mb: 1, color: "#818cf8", fontWeight: 600 }}
         >
           About Me
         </Typography>
-        <Typography sx={{ mb: 3, letterSpacing: "1px" }}>
+        <Typography sx={{ mb: 3, letterSpacing: "0.5px", lineHeight: 1.6 }}>
           I'm a Full-Stack Developer from Cairo, Egypt, passionate about
           building scalable, modern, and user-friendly software solutions. I
           love turning ideas into real applications and constantly exploring new
@@ -387,11 +406,11 @@ const InfoDialog = React.memo(({ openInfoDialog, handleCloseInfoDialog }) => {
         {/* Tech Stack */}
         <Typography
           variant="h6"
-          sx={{ mb: 1, color: "#9b5de5", fontWeight: 600 }}
+          sx={{ mb: 1, color: "#7c3aed", fontWeight: 600 }}
         >
           Technology Stack
         </Typography>
-        <Box sx={{ display: "flex", flexWrap: "wrap", gap: 2, mb: 3 }}>
+        <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1.5, mb: 3 }}>
           {[
             "React",
             "Python & FastAPI",
@@ -405,10 +424,13 @@ const InfoDialog = React.memo(({ openInfoDialog, handleCloseInfoDialog }) => {
               key={i}
               sx={{
                 px: 2,
-                py: 0.5,
+                py: 1,
                 borderRadius: "12px",
-                background: "rgba(255,255,255,0.08)",
+                background: "rgba(99, 102, 241, 0.1)",
+                border: "1px solid rgba(99, 102, 241, 0.2)",
                 fontSize: "0.85rem",
+                backdropFilter: "blur(8px)",
+                WebkitBackdropFilter: "blur(8px)",
               }}
             >
               {tech}
@@ -419,11 +441,17 @@ const InfoDialog = React.memo(({ openInfoDialog, handleCloseInfoDialog }) => {
         {/* Help Developers */}
         <Typography
           variant="h6"
-          sx={{ mb: 1, color: "#22d3ee", fontWeight: 600 }}
+          sx={{ mb: 1, color: "#6366f1", fontWeight: 600 }}
         >
           How I Can Help Developers
         </Typography>
-        <ul style={{ marginLeft: "1.2rem", marginBottom: "1.5rem" }}>
+        <ul
+          style={{
+            marginLeft: "1.2rem",
+            marginBottom: "1.5rem",
+            lineHeight: 1.8,
+          }}
+        >
           <li>Collaborate on projects as a freelancer</li>
           <li>Provide guidance on specific technologies or challenges</li>
           <li>Share best practices for clean maintainable code</li>
@@ -432,11 +460,11 @@ const InfoDialog = React.memo(({ openInfoDialog, handleCloseInfoDialog }) => {
         {/* Help Clients */}
         <Typography
           variant="h6"
-          sx={{ mb: 1, color: "#f15bb5", fontWeight: 600 }}
+          sx={{ mb: 1, color: "#a78bfa", fontWeight: 600 }}
         >
           How I Can Help Clients
         </Typography>
-        <ul style={{ marginLeft: "1.2rem" }}>
+        <ul style={{ marginLeft: "1.2rem", lineHeight: 1.8 }}>
           <li>Transform your ideas into fully functional software</li>
           <li>Build and manage your website or web application</li>
           <li>Redesign and modernize existing websites</li>
@@ -444,22 +472,23 @@ const InfoDialog = React.memo(({ openInfoDialog, handleCloseInfoDialog }) => {
         </ul>
       </DialogContent>
 
-      <DialogActions sx={{ justifyContent: "center", mt: 2 }}>
+      <DialogActions sx={{ justifyContent: "center", mt: 2, pb: 3 }}>
         <Button
           onClick={handleCloseInfoDialog}
           sx={{
-            background: "linear-gradient(135deg,#00c6ff,#0072ff)",
+            background: "linear-gradient(135deg, #6366f1, #7c3aed)",
             color: "white",
             px: 4,
             py: 1,
-            borderRadius: "30px",
+            borderRadius: "14px",
             fontWeight: 600,
             letterSpacing: 1,
             textTransform: "none",
-            boxShadow: "0 4px 12px rgba(0,0,0,0.3)",
+            boxShadow: "0 4px 20px rgba(99, 102, 241, 0.3)",
             "&:hover": {
-              background: "linear-gradient(135deg,#0072ff,#00c6ff)",
-              transform: "scale(1.05)",
+              background: "linear-gradient(135deg, #7c3aed, #6366f1)",
+              transform: "scale(1.03)",
+              boxShadow: "0 6px 24px rgba(99, 102, 241, 0.4)",
             },
           }}
         >
@@ -472,24 +501,21 @@ const InfoDialog = React.memo(({ openInfoDialog, handleCloseInfoDialog }) => {
 
 const ProjectDialog = React.memo(
   ({ openProjectDialog, handleCloseProjectDialog, projectInfo }) => {
-    console.log("ProjectDialog Rendered");
     return (
       <Dialog
         open={openProjectDialog}
         onClose={handleCloseProjectDialog}
         PaperProps={{
           sx: {
-            borderRadius: "20px",
-            background: "rgba(255,255,255,0.05)",
-            backdropFilter: "blur(12px)",
-            border: "1px solid rgba(255,255,255,0.1)",
-            boxShadow: "0 8px 32px rgba(0,0,0,0.4)",
+            borderRadius: "24px",
+            background: "rgba(255, 255, 255, 0.05)",
+            backdropFilter: "blur(16px)",
+            WebkitBackdropFilter: "blur(16px)",
+            border: "1px solid rgba(255, 255, 255, 0.1)",
+            boxShadow: "0 12px 40px rgba(0, 0, 0, 0.3)",
             maxWidth: "900px",
             width: "95%",
             maxHeight: "90vh",
-            overflowY: "auto",
-            "&::-webkit-scrollbar": { display: "none" },
-            scrollbarWidth: "none",
           },
         }}
       >
@@ -497,11 +523,12 @@ const ProjectDialog = React.memo(
           sx={{
             textAlign: "center",
             fontWeight: 700,
-            fontSize: "1.6rem",
-            background: "linear-gradient(90deg,#00f5d4,#9b5de5,#f15bb5)",
+            fontSize: "1.8rem",
+            background: "linear-gradient(90deg, #818cf8, #7c3aed, #6366f1)",
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
             mb: 2,
+            pt: 3,
           }}
         >
           Project Details
@@ -509,62 +536,117 @@ const ProjectDialog = React.memo(
 
         <DialogContent
           dividers={false}
+          className="dialog-scrollable"
           sx={{
-            color: "rgba(255,255,255,0.9)",
-            fontSize: "0.95rem",
+            color: "rgba(255, 255, 255, 0.9)",
+            fontSize: "1rem",
             px: 3,
-            "&::-webkit-scrollbar": { display: "none" },
-            scrollbarWidth: "none",
+            maxHeight: "70vh",
+            overflowY: "auto",
           }}
         >
+          <Box sx={{ textAlign: "center", mb: 3 }}>
+            <img
+              src={projectInfo.image}
+              alt={projectInfo.name}
+              loading="lazy"
+              style={{
+                width: "100%",
+                maxHeight: "300px",
+                objectFit: "cover",
+                borderRadius: "12px",
+                boxShadow: "0 8px 24px rgba(0, 0, 0, 0.3)",
+              }}
+            />
+          </Box>
+
           <Typography
             variant="h6"
-            sx={{ mb: 1, color: "#00f5d4", fontWeight: 600 }}
+            sx={{ mb: 1, color: "#818cf8", fontWeight: 600 }}
           >
-            Name: {projectInfo.name}
+            {projectInfo.name}
           </Typography>
+
+          <Box sx={{ display: "flex", gap: 2, mb: 3, flexWrap: "wrap" }}>
+            <Button
+              variant="contained"
+              href={projectInfo.youtubeVideo}
+              target="_blank"
+              sx={{
+                background: "linear-gradient(135deg, #6366f1, #7c3aed)",
+                color: "white",
+                px: 3,
+                py: 1,
+                borderRadius: "12px",
+                fontWeight: 600,
+                textTransform: "none",
+                boxShadow: "0 4px 20px rgba(99, 102, 241, 0.3)",
+                "&:hover": {
+                  background: "linear-gradient(135deg, #7c3aed, #6366f1)",
+                  transform: "scale(1.03)",
+                },
+              }}
+            >
+              Watch Video
+            </Button>
+            <Button
+              variant="outlined"
+              href={projectInfo.sourceCode}
+              target="_blank"
+              sx={{
+                color: "#818cf8",
+                borderColor: "#818cf8",
+                px: 3,
+                py: 1,
+                borderRadius: "12px",
+                fontWeight: 600,
+                textTransform: "none",
+                "&:hover": {
+                  background: "rgba(129, 140, 248, 0.1)",
+                  borderColor: "#a78bfa",
+                },
+              }}
+            >
+              Source Code
+            </Button>
+          </Box>
+
           <Typography
             variant="h6"
-            sx={{ mb: 1, color: "#9b5de5", fontWeight: 600 }}
-          >
-            <a href={projectInfo.youtubeVideo} target="_blank">
-              show video
-            </a>
-          </Typography>
-          <Typography
-            variant="h6"
-            sx={{ mb: 1, color: "#9b5de5", fontWeight: 600 }}
-          >
-            <a href={projectInfo.sourceCode} target="_blank">
-              source code
-            </a>
-          </Typography>
-          <Typography
-            variant="h6"
-            sx={{ mb: 1, color: "#9b5de5", fontWeight: 600 }}
+            sx={{ mb: 1, color: "#7c3aed", fontWeight: 600 }}
           >
             Description
           </Typography>
-          <Typography sx={{ mb: 3, letterSpacing: "0.5px" }}>
+          <Typography
+            sx={{
+              mb: 3,
+              letterSpacing: "0.5px",
+              lineHeight: 1.7,
+              whiteSpace: "pre-line",
+            }}
+          >
             {projectInfo.description}
           </Typography>
 
           <Typography
             variant="h6"
-            sx={{ mb: 1, color: "#f15bb5", fontWeight: 600 }}
+            sx={{ mb: 1, color: "#6366f1", fontWeight: 600 }}
           >
             Technologies
           </Typography>
-          <Box sx={{ display: "flex", flexWrap: "wrap", gap: 2, mb: 3 }}>
+          <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1.5, mb: 3 }}>
             {projectInfo.technologies.map((tech, i) => (
               <Box
                 key={i}
                 sx={{
                   px: 2,
-                  py: 0.5,
+                  py: 1,
                   borderRadius: "12px",
-                  background: "rgba(255,255,255,0.08)",
+                  background: "rgba(99, 102, 241, 0.1)",
+                  border: "1px solid rgba(99, 102, 241, 0.2)",
                   fontSize: "0.85rem",
+                  backdropFilter: "blur(8px)",
+                  WebkitBackdropFilter: "blur(8px)",
                 }}
               >
                 {tech}
@@ -573,22 +655,23 @@ const ProjectDialog = React.memo(
           </Box>
         </DialogContent>
 
-        <DialogActions sx={{ justifyContent: "center", mt: 2, mb: 2 }}>
+        <DialogActions sx={{ justifyContent: "center", mt: 2, mb: 3 }}>
           <Button
             onClick={handleCloseProjectDialog}
             sx={{
-              background: "linear-gradient(135deg,#00c6ff,#0072ff)",
+              background: "linear-gradient(135deg, #6366f1, #7c3aed)",
               color: "white",
               px: 4,
               py: 1,
-              borderRadius: "30px",
+              borderRadius: "14px",
               fontWeight: 600,
               letterSpacing: 1,
               textTransform: "none",
-              boxShadow: "0 4px 12px rgba(0,0,0,0.3)",
+              boxShadow: "0 4px 20px rgba(99, 102, 241, 0.3)",
               "&:hover": {
-                background: "linear-gradient(135deg,#0072ff,#00c6ff)",
-                transform: "scale(1.05)",
+                background: "linear-gradient(135deg, #7c3aed, #6366f1)",
+                transform: "scale(1.03)",
+                boxShadow: "0 6px 24px rgba(99, 102, 241, 0.4)",
               },
             }}
           >
@@ -601,26 +684,33 @@ const ProjectDialog = React.memo(
 );
 
 const SwiperProjects = React.memo(({ projects }) => {
-  console.log("SwiperProjects Rendered");
   return (
     <Swiper
-      style={{ width: "100%", margin: "20px 0", overflow: "hidden" }}
+      style={{
+        width: "100%",
+        margin: "40px 0",
+        overflow: "visible",
+        padding: "20px 0",
+      }}
       effect={"coverflow"}
       grabCursor={true}
       centeredSlides={true}
       slidesPerView={"auto"}
       initialSlide={Math.floor(projects.length / 2)}
-      mousewheel={true}
+      mousewheel={{ releaseOnEdges: true, sensitivity: 0.7 }}
       coverflowEffect={{
-        rotate: 180,
-        stretch: 50,
-        depth: 450,
+        rotate: 0,
+        stretch: 0,
+        depth: 300,
         modifier: 1,
-        slideShadows: true,
-        scale: 0.8,
+        slideShadows: false,
+        scale: 0.85,
       }}
       modules={[EffectCoverflow, Mousewheel, Pagination]}
       className="mySwiper"
+      speed={800}
+      resistance={true}
+      resistanceRatio={0.6}
     >
       {projects}
     </Swiper>
@@ -628,7 +718,6 @@ const SwiperProjects = React.memo(({ projects }) => {
 });
 
 const MarqueeAnimation = React.memo(({ images }) => {
-  console.log("MarqueeAnimation Rendered");
   return (
     <div className="custom-marquee">
       <div className="marquee-track">
@@ -640,7 +729,6 @@ const MarqueeAnimation = React.memo(({ images }) => {
 });
 
 const Footer = React.memo(() => {
-  console.log("Footer Rendered");
   return (
     <Box
       sx={{
@@ -650,53 +738,55 @@ const Footer = React.memo(() => {
         position: "fixed",
         bottom: 0,
         width: "100%",
+        backdropFilter: "blur(10px)",
+        WebkitBackdropFilter: "blur(10px)",
+        background: "rgba(10, 10, 20, 0.5)",
+        borderTop: "1px solid rgba(255, 255, 255, 0.05)",
+        zIndex: 10,
       }}
     >
-      <Box sx={{ display: "flex", justifyContent: "center", gap: 2 }}>
-        <GitHubIcon
-          sx={{ cursor: "pointer", fontSize: 25 }}
-          onClick={() =>
-            window.open("https://github.com/NoorEldin-1", "_blank")
-          }
-        />
-        <YouTubeIcon
-          sx={{ cursor: "pointer", fontSize: 25 }}
-          onClick={() =>
-            window.open("https://www.youtube.com/@nooreldin_1", "_blank")
-          }
-        />
-        <XIcon
-          sx={{ cursor: "pointer", fontSize: 25 }}
-          onClick={() => window.open("https://x.com/nooreldin_wd", "_blank")}
-        />
-        <InstagramIcon
-          sx={{ cursor: "pointer", fontSize: 25 }}
-          onClick={() =>
-            window.open("https://www.instagram.com/nooreldin_wd/", "_blank")
-          }
-        />
-        <LinkedInIcon
-          sx={{ cursor: "pointer", fontSize: 25 }}
-          onClick={() =>
-            window.open(
-              "https://www.linkedin.com/in/noor-el-din-b72860379/",
-              "_blank"
-            )
-          }
-        />
-        <FacebookIcon
-          sx={{ cursor: "pointer", fontSize: 25 }}
-          onClick={() =>
-            window.open(
-              "https://www.facebook.com/profile.php?id=61575194101114",
-              "_blank"
-            )
-          }
-        />
-        <WhatsAppIcon
-          sx={{ cursor: "pointer", fontSize: 25 }}
-          onClick={() => window.open("https://wa.me/201552678658", "_blank")}
-        />
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          gap: 2,
+          flexWrap: "wrap",
+        }}
+      >
+        {[
+          { icon: GitHubIcon, url: "https://github.com/NoorEldin-1" },
+          { icon: YouTubeIcon, url: "https://www.youtube.com/@nooreldin_1" },
+          { icon: XIcon, url: "https://x.com/nooreldin_wd" },
+          {
+            icon: InstagramIcon,
+            url: "https://www.instagram.com/nooreldin_wd/",
+          },
+          {
+            icon: LinkedInIcon,
+            url: "https://www.linkedin.com/in/noor-el-din-b72860379/",
+          },
+          {
+            icon: FacebookIcon,
+            url: "https://www.facebook.com/profile.php?id=61575194101114",
+          },
+          { icon: WhatsAppIcon, url: "https://wa.me/201552678658" },
+        ].map((social, index) => (
+          <social.icon
+            key={index}
+            className="footer-icons"
+            sx={{
+              cursor: "pointer",
+              fontSize: 25,
+              transition: "all 0.3s ease",
+              "&:hover": {
+                color: "#818cf8",
+                transform: "translateY(-2px)",
+                filter: "drop-shadow(0 0 8px rgba(99, 102, 241, 0.5))",
+              },
+            }}
+            onClick={() => window.open(social.url, "_blank")}
+          />
+        ))}
       </Box>
     </Box>
   );
