@@ -1,3 +1,8 @@
+@import "tailwindcss";
+@theme {
+  --font-Hanalei: "Hanalei Fill", cursive;
+}
+
 /* ========== GLOBAL RESET ========== */
 * {
   box-sizing: border-box;
@@ -214,10 +219,9 @@ body {
 
 /* ========== MARQUEE ========== */
 .custom-marquee {
-  width: 90%;
+  width: 100%;
   height: 60px;
   margin: 40px auto;
-  border-radius: 16px;
   background: rgba(255, 255, 255, 0.03);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
@@ -263,7 +267,7 @@ body {
 /* Marquee content */
 .marquee-track {
   display: flex;
-  gap: 50px;
+  gap: 450px;
   width: fit-content;
   animation: marquee 25s linear infinite;
   will-change: transform;
@@ -274,7 +278,7 @@ body {
   will-change: transform;
   align-items: center;
 }
-.marquee-content:hover {
+.marquee-track:hover {
   animation-play-state: paused;
 }
 .marquee-content img {
@@ -346,72 +350,4 @@ body {
 
 .dialog-scrollable::-webkit-scrollbar-thumb:hover {
   background: rgba(99, 102, 241, 0.7);
-}
-
-/* ========== RESPONSIVE ADJUSTMENTS ========== */
-@media (max-width: 768px) {
-  .hero-text-wrapper {
-    margin-top: 10vh;
-  }
-
-  .reveal-colored-text {
-    font-size: 2rem;
-  }
-
-  .reveal-subtext-colored {
-    font-size: 1rem;
-  }
-
-  .custom-marquee {
-    height: 50px;
-    margin: 30px auto;
-  }
-
-  .marquee-content img {
-    height: 30px;
-  }
-
-  .swiper-slide {
-    height: 220px !important;
-    width: 220px !important;
-  }
-
-  .aurora-blob:nth-child(1) {
-    width: 300px;
-    height: 300px;
-  }
-
-  .aurora-blob:nth-child(2) {
-    width: 400px;
-    height: 400px;
-  }
-
-  .aurora-blob:nth-child(3) {
-    width: 250px;
-    height: 250px;
-  }
-}
-
-@media (max-width: 480px) {
-  .content-container {
-    padding: 10px;
-  }
-
-  .reveal-colored-text {
-    font-size: 1.5rem;
-    letter-spacing: 2px;
-  }
-
-  .tooltip-wrapper {
-    margin-top: 40px;
-  }
-
-  .swiper-slide {
-    height: 180px !important;
-    width: 180px !important;
-  }
-
-  .aurora-container {
-    filter: blur(30px);
-  }
 }

@@ -1,23 +1,6 @@
-import {
-  Box,
-  Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-  Typography,
-} from "@mui/material";
 import "./App.css";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import GitHubIcon from "@mui/icons-material/GitHub";
-import YouTubeIcon from "@mui/icons-material/YouTube";
-import XIcon from "@mui/icons-material/X";
-import InstagramIcon from "@mui/icons-material/Instagram";
-import LinkedInIcon from "@mui/icons-material/LinkedIn";
-import FacebookIcon from "@mui/icons-material/Facebook";
-import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { EffectCoverflow, Mousewheel, Pagination } from "swiper/modules";
+import { EffectCoverflow, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import React, { useState, useMemo, useCallback } from "react";
@@ -31,6 +14,15 @@ import mysql from "./assets/mysql.png";
 import php from "./assets/php.png";
 import python from "./assets/python.png";
 import tailwind from "./assets/Tailwind CSS.png";
+
+import { FaGithub } from "react-icons/fa";
+import { FaYoutube } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
+import { FaInstagram } from "react-icons/fa6";
+import { FaLinkedin } from "react-icons/fa";
+import { FaFacebook } from "react-icons/fa";
+import { FaWhatsapp } from "react-icons/fa";
+import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 
 const projectsData = [
   {
@@ -207,64 +199,26 @@ const App = React.memo(() => {
       >
         <img
           src={project.image}
-          alt=""
           loading="lazy"
-          style={{
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-            filter: "brightness(0.8)",
-          }}
+          className="w-full h-full object-cover brightness-80"
         />
-        <Box
-          sx={{
-            position: "absolute",
-            bottom: 0,
-            left: 0,
-            right: 0,
-            background: "linear-gradient(to top, rgba(0,0,0,0.8), transparent)",
-            p: 2,
-            pt: 4,
-          }}
-        >
-          <Button
-            variant="contained"
-            sx={{
-              width: "100%",
-              background: "linear-gradient(135deg, #6366f1, #7c3aed)",
-              color: "white",
-              fontWeight: "600",
-              letterSpacing: "1px",
-              textTransform: "none",
-              borderRadius: "12px",
-              py: 1,
-              boxShadow: "0 4px 20px rgba(99, 102, 241, 0.3)",
-              "&:hover": {
-                background: "linear-gradient(135deg, #7c3aed, #6366f1)",
-                boxShadow: "0 6px 24px rgba(99, 102, 241, 0.4)",
-                transform: "scale(1.02)",
-              },
-            }}
+        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent px-5">
+          <button
+            className="font-Hanalei rounded-xl cursor-pointer w-full bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-semibold tracking-[1px] normal-case py-1 shadow-[0_4px_20px_rgba(99,102,241,0.3)] hover:bg-gradient-to-r hover:from-purple-600 hover:to-indigo-500 hover:shadow-[0_6px_24px_rgba(99,102,241,0.4)] hover:scale-102"
             onClick={() => {
               handleOpenProjectDialog(project);
             }}
           >
             View Details
-          </Button>
-        </Box>
+          </button>
+        </div>
       </SwiperSlide>
     ));
   }, [handleOpenProjectDialog]);
 
   const images = useMemo(() => {
     return imagesData.map((img, i) => (
-      <img
-        key={i}
-        src={img}
-        alt=""
-        loading="lazy"
-        style={{ width: "50px", height: "50px" }}
-      />
+      <img key={i} src={img} alt="" style={{ width: "40px", height: "40px" }} />
     ));
   }, []);
 
@@ -302,41 +256,29 @@ const AnimatedBackground = React.memo(() => {
   return (
     <div className="aurora-container">
       <div className="aurora-blob"></div>
-      <div className="aurora-blob"></div>
-      <div className="aurora-blob"></div>
     </div>
   );
 });
 
 const MainContent = React.memo(({ handleOpenInfoDialog }) => {
   return (
-    <div className="content-container">
-      <Typography variant="h4" align="center" className="reveal-colored-text">
+    <div className="content-container font-Hanalei">
+      <div className="text-4xl text-center reveal-colored-text">
         Noor El-Din
-      </Typography>
+      </div>
 
-      <Typography
-        variant="h6"
-        align="center"
-        className="reveal-subtext-colored"
-      >
+      <div className="text-xl text-center reveal-subtext-colored">
         Full-Stack Developer
-      </Typography>
+      </div>
 
       <div className="tooltip-wrapper">
-        <Typography
-          variant="h5"
-          align="center"
-          className="reveal-subtext-colored"
-          display="flex"
-          alignItems="center"
-          justifyContent="center"
-          sx={{ gap: 1, cursor: "pointer", position: "relative" }}
+        <div
+          className="text-2xl text-center reveal-subtext-colored flex items-center justify-center gap-2 cursor-pointer relative"
           onClick={handleOpenInfoDialog}
         >
           how can i help you
-          <KeyboardArrowDownIcon fontSize="large" />
-        </Typography>
+          <MdOutlineKeyboardArrowDown className="text-4xl" />
+        </div>
 
         <div className="always-tooltip">Click Here Please</div>
       </div>
@@ -344,341 +286,159 @@ const MainContent = React.memo(({ handleOpenInfoDialog }) => {
   );
 });
 
-const InfoDialog = React.memo(({ openInfoDialog, handleCloseInfoDialog }) => {
+const InfoDialog = React.memo(({ handleCloseInfoDialog }) => {
   return (
-    <Dialog
-      open={openInfoDialog}
-      onClose={handleCloseInfoDialog}
-      scroll="paper"
-      PaperProps={{
-        sx: {
-          borderRadius: "24px",
-          background: "rgba(255, 255, 255, 0.05)",
-          backdropFilter: "blur(16px)",
-          WebkitBackdropFilter: "blur(16px)",
-          border: "1px solid rgba(255, 255, 255, 0.1)",
-          boxShadow: "0 12px 40px rgba(0, 0, 0, 0.3)",
-          maxWidth: "800px",
-          width: "90%",
-          maxHeight: "80vh",
-        },
-      }}
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 bg-opacity-50"
+      onClick={handleCloseInfoDialog}
     >
-      <DialogTitle
-        sx={{
-          textAlign: "center",
-          fontWeight: 700,
-          fontSize: "1.8rem",
-          background: "linear-gradient(90deg, #818cf8, #7c3aed, #6366f1)",
-          WebkitBackgroundClip: "text",
-          WebkitTextFillColor: "transparent",
-          mb: 2,
-          pt: 3,
-        }}
+      <div
+        className="rounded-3xl bg-white/5 border border-white/10 shadow-2xl max-w-[800px] w-[90%] max-h-[80vh] flex flex-col"
+        onClick={(e) => e.stopPropagation()}
       >
-        How can I help you?
-      </DialogTitle>
+        <h2 className="text-center font-bold text-[1.8rem] bg-gradient-to-r from-indigo-400 via-purple-600 to-indigo-500 bg-clip-text text-transparent mb-4 pt-6">
+          How can I help you?
+        </h2>
 
-      <DialogContent
-        dividers
-        className="dialog-scrollable"
-        sx={{
-          color: "rgba(255, 255, 255, 0.9)",
-          fontSize: "1rem",
-          maxHeight: "60vh",
-          overflowY: "auto",
-        }}
-      >
-        {/* About Me */}
-        <Typography
-          variant="h6"
-          sx={{ mb: 1, color: "#818cf8", fontWeight: 600 }}
-        >
-          About Me
-        </Typography>
-        <Typography sx={{ mb: 3, letterSpacing: "0.5px", lineHeight: 1.6 }}>
-          I'm a Full-Stack Developer from Cairo, Egypt, passionate about
-          building scalable, modern, and user-friendly software solutions. I
-          love turning ideas into real applications and constantly exploring new
-          technologies to improve my craft.
-        </Typography>
+        <div className="dialog-scrollable text-white/90 text-base max-h-[60vh] overflow-y-auto border-y border-white/10 px-6 py-4">
+          <h6 className="mb-2 text-indigo-400 font-semibold">About Me</h6>
+          <p className="mb-6 tracking-[0.5px] leading-relaxed">
+            I'm a Full-Stack Developer from Cairo, Egypt, passionate about
+            building scalable, modern, and user-friendly software solutions. I
+            love turning ideas into real applications and constantly exploring
+            new technologies to improve my craft.
+          </p>
+          <h6 className="mb-2 text-purple-600 font-semibold">
+            Technology Stack
+          </h6>
+          <div className="flex flex-wrap gap-3 mb-6">
+            {[
+              "React",
+              "Python & FastAPI",
+              "PHP & Laravel",
+              "MySQL",
+              "Material UI",
+              "Tailwind CSS",
+              "Framer Motion",
+            ].map((tech, i) => (
+              <div
+                key={i}
+                className="px-4 py-2 rounded-xl bg-indigo-500/10 border border-indigo-500/20 text-sm select-none"
+              >
+                {tech}
+              </div>
+            ))}
+          </div>
 
-        {/* Tech Stack */}
-        <Typography
-          variant="h6"
-          sx={{ mb: 1, color: "#7c3aed", fontWeight: 600 }}
-        >
-          Technology Stack
-        </Typography>
-        <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1.5, mb: 3 }}>
-          {[
-            "React",
-            "Python & FastAPI",
-            "PHP & Laravel",
-            "MySQL",
-            "Material UI",
-            "Tailwind CSS",
-            "Framer Motion",
-          ].map((tech, i) => (
-            <Box
-              key={i}
-              sx={{
-                px: 2,
-                py: 1,
-                borderRadius: "12px",
-                background: "rgba(99, 102, 241, 0.1)",
-                border: "1px solid rgba(99, 102, 241, 0.2)",
-                fontSize: "0.85rem",
-                backdropFilter: "blur(8px)",
-                WebkitBackdropFilter: "blur(8px)",
-              }}
-            >
-              {tech}
-            </Box>
-          ))}
-        </Box>
+          <h6 className="mb-2 text-indigo-500 font-semibold">
+            How I Can Help Developers
+          </h6>
+          <ul className="ml-[1.2rem] mb-6 leading-[1.8] list-disc list-inside">
+            <li>Collaborate on projects as a freelancer</li>
+            <li>Provide guidance on specific technologies or challenges</li>
+            <li>Share best practices for clean maintainable code</li>
+          </ul>
 
-        {/* Help Developers */}
-        <Typography
-          variant="h6"
-          sx={{ mb: 1, color: "#6366f1", fontWeight: 600 }}
-        >
-          How I Can Help Developers
-        </Typography>
-        <ul
-          style={{
-            marginLeft: "1.2rem",
-            marginBottom: "1.5rem",
-            lineHeight: 1.8,
-          }}
-        >
-          <li>Collaborate on projects as a freelancer</li>
-          <li>Provide guidance on specific technologies or challenges</li>
-          <li>Share best practices for clean maintainable code</li>
-        </ul>
+          <h6 className="mb-2 text-violet-400 font-semibold">
+            How I Can Help Clients
+          </h6>
+          <ul className="ml-[1.2rem] leading-[1.8] list-disc list-inside">
+            <li>Transform your ideas into fully functional software</li>
+            <li>Build and manage your website or web application</li>
+            <li>Redesign and modernize existing websites</li>
+            <li>Fix incomplete or underperforming projects</li>
+          </ul>
+        </div>
 
-        {/* Help Clients */}
-        <Typography
-          variant="h6"
-          sx={{ mb: 1, color: "#a78bfa", fontWeight: 600 }}
-        >
-          How I Can Help Clients
-        </Typography>
-        <ul style={{ marginLeft: "1.2rem", lineHeight: 1.8 }}>
-          <li>Transform your ideas into fully functional software</li>
-          <li>Build and manage your website or web application</li>
-          <li>Redesign and modernize existing websites</li>
-          <li>Fix incomplete or underperforming projects</li>
-        </ul>
-      </DialogContent>
-
-      <DialogActions sx={{ justifyContent: "center", mt: 2, pb: 3 }}>
-        <Button
-          onClick={handleCloseInfoDialog}
-          sx={{
-            background: "linear-gradient(135deg, #6366f1, #7c3aed)",
-            color: "white",
-            px: 4,
-            py: 1,
-            borderRadius: "14px",
-            fontWeight: 600,
-            letterSpacing: 1,
-            textTransform: "none",
-            boxShadow: "0 4px 20px rgba(99, 102, 241, 0.3)",
-            "&:hover": {
-              background: "linear-gradient(135deg, #7c3aed, #6366f1)",
-              transform: "scale(1.03)",
-              boxShadow: "0 6px 24px rgba(99, 102, 241, 0.4)",
-            },
-          }}
-        >
-          Close
-        </Button>
-      </DialogActions>
-    </Dialog>
+        <div className="flex justify-center mt-4 pb-6">
+          <button
+            onClick={handleCloseInfoDialog}
+            className="cursor-pointer bg-gradient-to-br from-indigo-500 to-purple-600 text-white px-8 py-2 rounded-[14px] font-semibold tracking-[1px] normal-case shadow-lg shadow-indigo-500/30 transition-all duration-300 hover:bg-gradient-to-br hover:from-purple-600 hover:to-indigo-500 hover:scale-[1.03] hover:shadow-xl hover:shadow-indigo-500/40"
+          >
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
   );
 });
 
 const ProjectDialog = React.memo(
-  ({ openProjectDialog, handleCloseProjectDialog, projectInfo }) => {
+  ({ handleCloseProjectDialog, projectInfo }) => {
     return (
-      <Dialog
-        open={openProjectDialog}
-        onClose={handleCloseProjectDialog}
-        PaperProps={{
-          sx: {
-            borderRadius: "24px",
-            background: "rgba(255, 255, 255, 0.05)",
-            backdropFilter: "blur(16px)",
-            WebkitBackdropFilter: "blur(16px)",
-            border: "1px solid rgba(255, 255, 255, 0.1)",
-            boxShadow: "0 12px 40px rgba(0, 0, 0, 0.3)",
-            maxWidth: "900px",
-            width: "95%",
-            maxHeight: "90vh",
-          },
-        }}
+      <div
+        className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 bg-opacity-50"
+        onClick={handleCloseProjectDialog}
       >
-        <DialogTitle
-          sx={{
-            textAlign: "center",
-            fontWeight: 700,
-            fontSize: "1.8rem",
-            background: "linear-gradient(90deg, #818cf8, #7c3aed, #6366f1)",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
-            mb: 2,
-            pt: 3,
-          }}
+        <div
+          className="rounded-3xl bg-white/5  border border-white/10 shadow-2xl max-w-[900px] w-[95%] max-h-[90vh] flex flex-col"
+          onClick={(e) => e.stopPropagation()}
         >
-          Project Details
-        </DialogTitle>
+          <h2 className="text-center font-bold text-[1.8rem] bg-gradient-to-r from-indigo-400 via-purple-600 to-indigo-500 bg-clip-text text-transparent mb-4 pt-6">
+            Project Details
+          </h2>
 
-        <DialogContent
-          dividers={false}
-          className="dialog-scrollable"
-          sx={{
-            color: "rgba(255, 255, 255, 0.9)",
-            fontSize: "1rem",
-            px: 3,
-            maxHeight: "70vh",
-            overflowY: "auto",
-          }}
-        >
-          <Box sx={{ textAlign: "center", mb: 3 }}>
-            <img
-              src={projectInfo.image}
-              alt={projectInfo.name}
-              loading="lazy"
-              style={{
-                width: "100%",
-                maxHeight: "300px",
-                objectFit: "cover",
-                borderRadius: "12px",
-                boxShadow: "0 8px 24px rgba(0, 0, 0, 0.3)",
-              }}
-            />
-          </Box>
+          <div className="dialog-scrollable text-white/90 text-base max-h-[70vh] overflow-y-auto px-6">
+            <div className="text-center mb-6">
+              <img
+                src={projectInfo.image}
+                alt={projectInfo.name}
+                loading="lazy"
+                className="w-full max-h-[300px] object-cover rounded-xl shadow-lg"
+              />
+            </div>
 
-          <Typography
-            variant="h6"
-            sx={{ mb: 1, color: "#818cf8", fontWeight: 600 }}
-          >
-            {projectInfo.name}
-          </Typography>
+            <h6 className="mb-2 text-indigo-400 font-semibold">
+              {projectInfo.name}
+            </h6>
 
-          <Box sx={{ display: "flex", gap: 2, mb: 3, flexWrap: "wrap" }}>
-            <Button
-              variant="contained"
-              href={projectInfo.youtubeVideo}
-              target="_blank"
-              sx={{
-                background: "linear-gradient(135deg, #6366f1, #7c3aed)",
-                color: "white",
-                px: 3,
-                py: 1,
-                borderRadius: "12px",
-                fontWeight: 600,
-                textTransform: "none",
-                boxShadow: "0 4px 20px rgba(99, 102, 241, 0.3)",
-                "&:hover": {
-                  background: "linear-gradient(135deg, #7c3aed, #6366f1)",
-                  transform: "scale(1.03)",
-                },
-              }}
-            >
-              Watch Video
-            </Button>
-            <Button
-              variant="outlined"
-              href={projectInfo.sourceCode}
-              target="_blank"
-              sx={{
-                color: "#818cf8",
-                borderColor: "#818cf8",
-                px: 3,
-                py: 1,
-                borderRadius: "12px",
-                fontWeight: 600,
-                textTransform: "none",
-                "&:hover": {
-                  background: "rgba(129, 140, 248, 0.1)",
-                  borderColor: "#a78bfa",
-                },
-              }}
-            >
-              Source Code
-            </Button>
-          </Box>
-
-          <Typography
-            variant="h6"
-            sx={{ mb: 1, color: "#7c3aed", fontWeight: 600 }}
-          >
-            Description
-          </Typography>
-          <Typography
-            sx={{
-              mb: 3,
-              letterSpacing: "0.5px",
-              lineHeight: 1.7,
-              whiteSpace: "pre-line",
-            }}
-          >
-            {projectInfo.description}
-          </Typography>
-
-          <Typography
-            variant="h6"
-            sx={{ mb: 1, color: "#6366f1", fontWeight: 600 }}
-          >
-            Technologies
-          </Typography>
-          <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1.5, mb: 3 }}>
-            {projectInfo.technologies.map((tech, i) => (
-              <Box
-                key={i}
-                sx={{
-                  px: 2,
-                  py: 1,
-                  borderRadius: "12px",
-                  background: "rgba(99, 102, 241, 0.1)",
-                  border: "1px solid rgba(99, 102, 241, 0.2)",
-                  fontSize: "0.85rem",
-                  backdropFilter: "blur(8px)",
-                  WebkitBackdropFilter: "blur(8px)",
-                }}
+            <div className="flex gap-4 mb-6 flex-wrap">
+              <a
+                href={projectInfo.youtubeVideo}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-gradient-to-br from-indigo-500 to-purple-600 text-white px-6 py-2 rounded-xl font-semibold normal-case shadow-lg shadow-indigo-500/30 transition-transform duration-300 hover:scale-[1.03] hover:bg-gradient-to-br hover:from-purple-600 hover:to-indigo-500"
               >
-                {tech}
-              </Box>
-            ))}
-          </Box>
-        </DialogContent>
+                Watch Video
+              </a>
+              <a
+                href={projectInfo.sourceCode}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-indigo-400 border border-indigo-400 px-6 py-2 rounded-xl font-semibold normal-case transition-colors duration-300 hover:bg-indigo-400/10 hover:border-violet-400"
+              >
+                Source Code
+              </a>
+            </div>
 
-        <DialogActions sx={{ justifyContent: "center", mt: 2, mb: 3 }}>
-          <Button
-            onClick={handleCloseProjectDialog}
-            sx={{
-              background: "linear-gradient(135deg, #6366f1, #7c3aed)",
-              color: "white",
-              px: 4,
-              py: 1,
-              borderRadius: "14px",
-              fontWeight: 600,
-              letterSpacing: 1,
-              textTransform: "none",
-              boxShadow: "0 4px 20px rgba(99, 102, 241, 0.3)",
-              "&:hover": {
-                background: "linear-gradient(135deg, #7c3aed, #6366f1)",
-                transform: "scale(1.03)",
-                boxShadow: "0 6px 24px rgba(99, 102, 241, 0.4)",
-              },
-            }}
-          >
-            Close
-          </Button>
-        </DialogActions>
-      </Dialog>
+            <h6 className="mb-2 text-purple-600 font-semibold">Description</h6>
+            <p className="mb-6 tracking-[0.5px] leading-[1.7] whitespace-pre-line">
+              {projectInfo.description}
+            </p>
+
+            <h6 className="mb-2 text-indigo-500 font-semibold">Technologies</h6>
+            <div className="flex flex-wrap gap-3 mb-6">
+              {projectInfo.technologies.map((tech, i) => (
+                <div
+                  key={i}
+                  className="px-4 py-2 rounded-xl bg-indigo-500/10 border border-indigo-500/20 text-sm select-none"
+                >
+                  {tech}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="flex justify-center mt-4 mb-6">
+            <button
+              onClick={handleCloseProjectDialog}
+              className=" cursor-pointer bg-gradient-to-br from-indigo-500 to-purple-600 text-white px-8 py-2 rounded-[14px] font-semibold tracking-[1px] normal-case shadow-lg shadow-indigo-500/30 transition-all duration-300 hover:bg-gradient-to-br hover:from-purple-600 hover:to-indigo-500 hover:scale-[1.03] hover:shadow-xl hover:shadow-indigo-500/40"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
     );
   }
 );
@@ -697,7 +457,6 @@ const SwiperProjects = React.memo(({ projects }) => {
       centeredSlides={true}
       slidesPerView={"auto"}
       initialSlide={Math.floor(projects.length / 2)}
-      mousewheel={{ releaseOnEdges: true, sensitivity: 0.7 }}
       coverflowEffect={{
         rotate: 0,
         stretch: 0,
@@ -706,11 +465,7 @@ const SwiperProjects = React.memo(({ projects }) => {
         slideShadows: false,
         scale: 0.85,
       }}
-      modules={[EffectCoverflow, Mousewheel, Pagination]}
-      className="mySwiper"
-      speed={800}
-      resistance={true}
-      resistanceRatio={0.6}
+      modules={[EffectCoverflow, Pagination]}
     >
       {projects}
     </Swiper>
@@ -730,65 +485,34 @@ const MarqueeAnimation = React.memo(({ images }) => {
 
 const Footer = React.memo(() => {
   return (
-    <Box
-      sx={{
-        color: "white",
-        textAlign: "center",
-        p: 2,
-        position: "fixed",
-        bottom: 0,
-        width: "100%",
-        backdropFilter: "blur(10px)",
-        WebkitBackdropFilter: "blur(10px)",
-        background: "rgba(10, 10, 20, 0.5)",
-        borderTop: "1px solid rgba(255, 255, 255, 0.05)",
-        zIndex: 10,
-      }}
-    >
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          gap: 2,
-          flexWrap: "wrap",
-        }}
-      >
+    <div className="text-white text-center p-4 fixed bottom-0 w-full backdrop-blur-[10px] bg-[rgba(10,10,20,0.5)] border-t border-white/5 z-10">
+      <div className="flex items-center justify-center gap-4 flex-wrap">
         {[
-          { icon: GitHubIcon, url: "https://github.com/NoorEldin-1" },
-          { icon: YouTubeIcon, url: "https://www.youtube.com/@nooreldin_1" },
-          { icon: XIcon, url: "https://x.com/nooreldin_wd" },
+          { icon: FaGithub, url: "https://github.com/NoorEldin-1" },
+          { icon: FaYoutube, url: "https://www.youtube.com/@nooreldin_1" },
+          { icon: FaXTwitter, url: "https://x.com/nooreldin_wd" },
           {
-            icon: InstagramIcon,
+            icon: FaInstagram,
             url: "https://www.instagram.com/nooreldin_wd/",
           },
           {
-            icon: LinkedInIcon,
+            icon: FaLinkedin,
             url: "https://www.linkedin.com/in/noor-el-din-b72860379/",
           },
           {
-            icon: FacebookIcon,
+            icon: FaFacebook,
             url: "https://www.facebook.com/profile.php?id=61575194101114",
           },
-          { icon: WhatsAppIcon, url: "https://wa.me/201552678658" },
+          { icon: FaWhatsapp, url: "https://wa.me/201552678658" },
         ].map((social, index) => (
           <social.icon
             key={index}
-            className="footer-icons"
-            sx={{
-              cursor: "pointer",
-              fontSize: 25,
-              transition: "all 0.3s ease",
-              "&:hover": {
-                color: "#818cf8",
-                transform: "translateY(-2px)",
-                filter: "drop-shadow(0 0 8px rgba(99, 102, 241, 0.5))",
-              },
-            }}
+            className="footer-icons cursor-pointer text-[25px] transition-all duration-300 ease-in-out hover:text-indigo-400 hover:-translate-y-0.5 hover:[filter:drop-shadow(0_0_8px_rgba(99,102,241,0.5))]"
             onClick={() => window.open(social.url, "_blank")}
           />
         ))}
-      </Box>
-    </Box>
+      </div>
+    </div>
   );
 });
 
