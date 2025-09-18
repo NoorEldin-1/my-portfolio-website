@@ -14,7 +14,6 @@ import mysql from "./assets/mysql.png";
 import php from "./assets/php.png";
 import python from "./assets/python.png";
 import tailwind from "./assets/Tailwind CSS.png";
-
 import { FaGithub } from "react-icons/fa";
 import { FaYoutube } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
