@@ -137,6 +137,48 @@ Playlist Downloads: Grab entire YouTube playlists in MP4 or MP3, with the same q
     ],
     image: `https://img.youtube.com/vi/B-g4ZWdilYU/hqdefault.jpg`,
   },
+  {
+    name: "CHATME",
+    description: `CHATME is a modern, real-time chat platform that enables seamless communication with friends and connections.
+Add friends, and enjoy smooth, instant messaging with a beautiful, responsive interface.
+⚡ Features
+Real-time Messaging — Instant delivery powered by WebSockets
+Friend System — Add and manage your friends list
+Modern UI — Clean, responsive design for all devices
+Secure Authentication — Protected accounts and user data
+
+Technologies Used
+React — Modern frontend framework
+Tailwind CSS — Utility-first CSS framework
+Framer Motion — Motion library for React animations
+Redux Toolkit — State management solution
+Axios — Promise-based HTTP client
+Laravel — Robust PHP backend framework
+Laravel Reverb — WebSocket server for real-time communication
+MySQL — Reliable relational database
+
+ Key Features
+ Real-time chat powered by Laravel Reverb
+Friend request management system
+Persistent message history
+Responsive and mobile-friendly UI
+Laravel-based secure authentication
+Smooth animations and transitions
+`,
+    sourceCode: "https://github.com/NoorEldin-1/CHATME",
+    youtubeVideo: "https://www.youtube.com/watch?v=XFcBjnkTNxA",
+    technologies: [
+      "React",
+      "axios",
+      "redux",
+      "tailwind",
+      "framer motion",
+      "laravel",
+      "laravel reverb",
+      "mysql",
+    ],
+    image: `https://img.youtube.com/vi/XFcBjnkTNxA/hqdefault.jpg`,
+  },
 ];
 
 const imagesData = [
